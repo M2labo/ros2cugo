@@ -79,7 +79,7 @@ ros2 launch cugo_bringup robot.launch.py
     colcon build --symlink-install
     ~~~
 
-    3. navigation2を開始(ターミナルを４つ利用)
+    3. navigation2を開始(ターミナルを5つ利用)
     ~~~
     cd ~/cugo_ws
     source install/setup.bash
@@ -89,6 +89,11 @@ ros2 launch cugo_bringup robot.launch.py
     cd ~/cugo_ws
     source install/setup.bash
     ros2 run rplidar_ros rplidar_node
+    ~~~
+    ~~~
+    cd ~/cugo_ws
+    source install/setup.bash
+    ros2 launch slam_toolbox online_async_launch.py
     ~~~
 
     ~~~
