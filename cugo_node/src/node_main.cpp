@@ -43,9 +43,7 @@ int main(int argc, char * argv[])
   sleep_for(std::chrono::seconds(5));
   auto cugo = std::make_shared<m2labo::cugo::Cugo>(pwm_right,pwm_left);
   executor.add_node(cugo);
-
   executor.spin();
-
   rclcpp::shutdown();
   pwm_right.stop();
   pwm_left.stop();
