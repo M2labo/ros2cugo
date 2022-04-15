@@ -1,19 +1,3 @@
-// Copyright 2019 ROBOTIS CO., LTD.
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//     http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
-//
-// Author: Ryuji Yasukochi
-
 #include "cugo_node/cugo.hpp"
 
 #include <memory>
@@ -34,8 +18,6 @@ Cugo::Cugo(GPIO::PWM & pwm_right,GPIO::PWM & pwm_left)
   RCLCPP_INFO(get_logger(), "Init Cugo Node Main");
   tf_broadcaster_ = std::make_unique<tf2_ros::TransformBroadcaster>(this);
 
-
-
   node_handle_ = std::shared_ptr<::rclcpp::Node>(this, [](::rclcpp::Node *) {});
 
   run(pwm_right,pwm_left);
@@ -45,13 +27,11 @@ Cugo::Cugo(GPIO::PWM & pwm_right,GPIO::PWM & pwm_left)
 
 void Cugo::run(GPIO::PWM & pwm_right,GPIO::PWM & pwm_left)
 {
- 
   RCLCPP_INFO(this->get_logger(), "Run!");
   v=0.0;
   w=0.0;
 
   publish_timer(std::chrono::milliseconds(50),pwm_right,pwm_left);
-
   auto qos = rclcpp::QoS(rclcpp::KeepLast(10));
   odom_pub_ = this->create_publisher<nav_msgs::msg::Odometry>("odom", qos);
   cmd_vel_sub_ = this->create_subscription<geometry_msgs::msg::Twist>(
@@ -71,7 +51,6 @@ void Cugo::publish_timer(const std::chrono::milliseconds timeout,GPIO::PWM & pwm
       now = ros_clock.now();
       rclcpp::Duration duration(rclcpp::Duration::from_nanoseconds(
           now.nanoseconds() - last_time.nanoseconds()));
-      
       
       calculate_odometry_PWM(duration);
       pwm_right.ChangeDutyCycle(val_r);
@@ -121,7 +100,7 @@ void Cugo::publish(const rclcpp::Time & now)
   odom_tf.transform.rotation = odom_msg->pose.pose.orientation;
 
   odom_tf.header.frame_id = "odom";
-  odom_tf.child_frame_id = "base_link";
+  odom_tf.child_frame_id = "base_footprint";
   odom_tf.header.stamp = now;
 
   odom_pub_->publish(std::move(odom_msg));
@@ -175,6 +154,5 @@ bool Cugo::calculate_odometry_PWM(const rclcpp::Duration & duration)
   }
   
   RCLCPP_INFO(this->get_logger(), "x : %f, y : %f", val_r, val_l);
-  
   return true;
 }
