@@ -78,9 +78,9 @@ ros2 launch cugo_bringup robot.launch.py
     ~~~
     cd ~/cugo_ws
     source install/setup.bash
-    ros2 run urg_node urg_node_driver --ros-args -p ip_address:="192.168.0.10"
+    ros2 run rplidar_ros rplidar_node
     ~~~
-    *ipは適宜設定変更してください
+
     ~~~
     cd ~/cugo_ws
     source install/setup.bash
