@@ -24,12 +24,23 @@ https://github.com/Qengineering/Jetson-Nano-Ubuntu-20-image
 
 https://qiita.com/kitazaki/items/a445994f1f46a1b15f78
 
+3. Jetson PWM C++のパッケージをインストールします。
 
-3. ros2 galacticをインストールします。
+~~~
+git clone https://github.com/pjueon/JetsonGPIO
+cd JetsonGPIO
+mkdir build && cd build
+make all
+sudo make install
+sudo reboot
+~~~
+
+
+4. ros2 galacticをインストールします。
 
 https://qiita.com/porizou1/items/30452faa5f108cfd8995
 
-4. cugo repositoryをビルドします。
+5. cugo repositoryをビルドします。
 
 ~~~
 mkdir -p ~/cugo_ws/src
