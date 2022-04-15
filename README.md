@@ -99,7 +99,7 @@ ros2 launch cugo_bringup robot.launch.py
     ~~~
     cd ~/cugo_ws
     source install/setup.bash
-    ros2 launch nav2_bringup navigation_launch.py
+    ros2 launch cugo_navigation2 navigation2.launch.py
     ~~~
     ~~~
     cd ~/cugo_ws
