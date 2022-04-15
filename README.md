@@ -1,8 +1,7 @@
 # Cugo Ros2
 
 ## はじめに
-こちらはCugoV3 Odometry　PluginなしのROS2Packageになります。多少強引な作りになっているかと思いますが、ROS2 Navigation2で制御できるところまで確認しています。
-
+こちらはCugoV3 Odometry　PluginなしのROS2Packageになります。
 
 ## 必要なもの
 CugoV3
